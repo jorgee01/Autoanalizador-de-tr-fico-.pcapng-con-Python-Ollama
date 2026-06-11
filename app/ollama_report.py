@@ -4,7 +4,7 @@ OLLAMA_URL = "http://localhost:11434/api/chat"
 MODEL = "deepseek-coder:1.3b"
 
 
-def formatear_summary(summary: dict) -> str:
+def formatear_summary(summary: dict) -> str:   # se formateó así el summary porque no lo aguantaba Ollama 1.3b
     tcp = summary.get("tcp", {})
     udp = summary.get("udp", {})
     app = summary.get("app", {})

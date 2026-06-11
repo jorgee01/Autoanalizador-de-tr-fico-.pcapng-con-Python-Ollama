@@ -36,13 +36,13 @@ def main():
     print(report)
 
     os.makedirs("reports", exist_ok=True)
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")       # ← adentro de main()
-    nombre_archivo = f"reports/reporte_{timestamp}.md"          # ← adentro de main()
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")     #le da formato de fecha a los reportes
+    nombre_archivo = f"reports/reporte_{timestamp}.md"         
 
-    with open(nombre_archivo, "w", encoding="utf-8") as f:      # ← adentro de main()
+    with open(nombre_archivo, "w", encoding="utf-8") as f:      
         f.write(report)
 
-    print(f"\nReporte guardado en {nombre_archivo}")            # ← adentro de main()
+    print(f"\nReporte guardado en {nombre_archivo}")            
 
 
 if __name__ == "__main__":

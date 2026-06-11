@@ -1,12 +1,13 @@
 # Analizador Automático de Tráfico de Red con IA
 
-> Herramienta académica desarrollada en Python para el análisis automático de capturas de tráfico de red en formato `.pcapng`, con generación de informes mediante Inteligencia Artificial local para el curso de redes y comunicación de datos.
+> Buenas! Esta es una herramienta académica desarrollada en Python para el análisis automático de capturas de tráfico de red en formato `.pcapng`, con generación de informes mediante Inteligencia Artificial local para el curso de redes y comunicación de datos. NO es lo más potente pero funciona.
+
 
 ---
 
 ## Descripción
 
-Este proyecto implementa una herramienta capaz de analizar automáticamente archivos de captura de tráfico de red en formato **.pcapng**, extrayendo estadísticas de la **Capa de Transporte del modelo OSI** (TCP y UDP).
+Este proyecto implementa una herramienta capaz de analizar por si sola archivos de captura de tráfico de red en formato **.pcapng**, extrayendo estadísticas de la **Capa de Transporte del modelo OSI** (TCP y UDP).
 
 El sistema identifica sesiones, conexiones establecidas, cierres de conexión y protocolos de aplicación inferidos por puerto. Como componente de IA, se integra **Ollama** con un modelo LLM ejecutado localmente, el cual interpreta las estadísticas extraídas y genera un informe narrativo en lenguaje natural.
 
@@ -17,7 +18,7 @@ El sistema identifica sesiones, conexiones establecidas, cierres de conexión y 
 | Componente | Versión mínima |
 |------------|---------------|
 | Python | 3.11 o superior |
-| Ollama | Última versión estable |
+| Ollama | 1.3b |
 | TShark (Wireshark) | Cualquier versión reciente |
 | Visual Studio Code | Opcional |
 
@@ -128,7 +129,7 @@ Ruta del archivo .pcapng: C:\Users\Usuario\Desktop\captura.pcapng
 
 Al finalizar el análisis:
 
-- Se imprime un resumen en consola.
+- Se imprime un resumencito en consola.
 - Se genera automáticamente el archivo:
 
 ```
@@ -153,38 +154,38 @@ reports/reporte_generado.md
 
 ### ¿Por qué Ollama?
 
-Se eligió **Ollama** como motor de IA porque permite ejecutar modelos de lenguaje **completamente de forma local**, sin necesidad de conexión a internet ni dependencia de servicios externos. Esto garantiza que la herramienta funcione en cualquier entorno, incluyendo redes aisladas o laboratorios sin acceso a la nube.
+Se eligió **Ollama** porque nos permite experimentar con ia local y así aprender un poco más de sus funcionalidades, aunque es un poco tiesa, podemos lograr buenos prompts con ella.
 
 ### Modelos utilizados
 
 | Modelo | Estado |
 |--------|--------|
-| `deepseek-coder:1.3b` | Descartado (ver bitácora de errores) |
-| `deepseek-coder:6.7b` | ✅ Modelo actual recomendado |
+| `deepseek-coder:1.3b` | Funcionó al final (ver bitácora de errores) |
+| `deepseek-coder:6.7b` |  Modelo actual(pesado, no sirvió) |
 
 El modelo recibe las estadísticas extraídas por el sistema y genera una explicación clara del comportamiento del tráfico observado. **No analiza directamente el archivo `.pcapng`** — interpreta los datos ya procesados.
 
 Para cambiar el modelo, modificar esta línea en `ollama_report.py`:
 
 ```python
-MODEL = "deepseek-coder:6.7b"
+MODEL = "deepseek-coder:1.3b"
 ```
 
 ---
 
 ## Bitácora de errores y decisiones técnicas
 
-### v0.1 — Modelo `deepseek-coder:1.3b`
+### v0.1 — Modelo `deepseek-coder:6.7b`
 
 **Problema:** El tiempo de generación del informe era muy lento, más de 1 minuto.
 
-**Causa:** El modelo de 1.3B tiene capacidad limitada para seguir instrucciones complejas. Con un prompt detallado de ~500 palabras, el modelo tardaba en procesar y tendía a **inventar datos** que ni siquiera existían en el archivo.
+**Causa:** El modelo de 1.3B tiene capacidad limitada para seguir instrucciones complejas. Con un prompt detallado de ~500 palabras, el modelo tardaba en procesar y tendía a **inventar datos** que ni siquiera existían en el archivo, aunque al menos arrancó bien.
 
 **Solución aplicada:**
 - Se redujo y simplificó el prompt para disminuir la carga de tokens.
 - Se agregó `temperature: 0.3` para reducir la "creatividad" del modelo y mejorar la precisión.
 - Se limitó la longitud de respuesta con `num_predict: 600`.
-- Finalmente se migró al modelo `deepseek-coder:6.7b` para obtener respuestas más precisas y en menor tiempo.
+- Finalmente volvimos al modelo `deepseek-coder:1.3b` para obtener respuestas más precisas y en menor tiempo.
 
 ---
 
@@ -193,7 +194,7 @@ MODEL = "deepseek-coder:6.7b"
 Proyecto desarrollado con fines académicos — Análisis de Tráfico de Red
 
 ```
-Jorg3~   Murillo Jiménez, C35519
+Jorg3~   Murillo, C35519
 Juni0r   Jiménez Arias
 ```
 
