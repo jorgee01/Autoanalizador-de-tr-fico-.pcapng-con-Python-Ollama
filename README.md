@@ -195,7 +195,7 @@ Proyecto desarrollado con fines académicos — Análisis de Tráfico de Red
 
 ```
 Jorg3~   Murillo, C35519
-Juni0r   Jiménez Arias
+Juni0r   Jiménez  Venegas
 ```
 
 > *Universidad de Costa Rica — Redes y Comunicaciones de Datos, I Ciclo 2026*

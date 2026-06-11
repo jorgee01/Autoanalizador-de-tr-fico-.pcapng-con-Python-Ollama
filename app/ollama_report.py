@@ -74,7 +74,7 @@ Dos párrafos: qué se puede inferir y si el comportamiento parece normal.
         }
     }
 
-    response = requests.post(OLLAMA_URL, json=payload, timeout=120)
+    response = requests.post(OLLAMA_URL, json=payload, timeout=180)
     response.raise_for_status()
     data = response.json()
     return data["message"]["content"]
